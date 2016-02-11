@@ -3,7 +3,7 @@
   "scripts": {
     "lint": "canonical lint ./src",
     "create-index": "create-index --update-index -- ./src",
-    "start": "babel-node ./src/bin/server.js"
+    "start": "NODE_ENV=development babel-node ./src/bin/server.js"
   },
   "devDependencies": {
     "babel-cli": "^6.5.1",
