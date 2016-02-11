@@ -33,10 +33,7 @@ npm install babel-cli -g
 cd ./client
 
 npm install
-
-NODE_ENV=development\
-    babel-node ./src/bin/server;\
-    say 'client crashed';
+npm start
 ```
 
 This will start the HTTP server on port 8000.
