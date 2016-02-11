@@ -11,7 +11,7 @@ initialState = Immutable.fromJS({
     exchanges: [],
     stocks: [],
     dataAvailable: false,
-    stockFilter: null
+    stockFilter: {}
 });
 
 let normalizeTradeData = (tradeData) => {
@@ -33,6 +33,13 @@ export default createReducer(initialState, {
         });
     },
     TRADE_DATA___SET_STOCK_FILTER (state, action) {
+        let selectedStock = state
+            .get('stocks')
+            .filter((stock) => {
+                return stock.get('sym') === action.data.sym;
+            })
+            .first();
+
         let filteredTrades = state
             .get('trades')
             .filter((trade) => {
@@ -40,7 +47,7 @@ export default createReducer(initialState, {
             });
 
         return state.merge({
-            stockFilter: action.data.sym,
+            stockFilter: selectedStock,
             filteredTrades
         });
     }

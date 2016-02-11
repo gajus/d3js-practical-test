@@ -5,7 +5,7 @@ import './styles.scss';
 import makeChart from './makeChart';
 
 export default class extends React.Component {
-    drawChart = (chart, tradeData) => {
+    drawChart = (chart, tradeData, stockName) => {
         let {
             clean,
             getTradeDataTimeDomain,
@@ -43,7 +43,7 @@ export default class extends React.Component {
         drawVerticalGrid(tradeDataTimeScale, tradeDataPriceScale);
 
         drawTradeDataTimeAxis(tradeDataTimeScale, tradeDataPriceScale);
-        drawTradeDataPriceAxis(tradeDataTimeScale, tradeDataPriceScale, 'GOG');
+        drawTradeDataPriceAxis(tradeDataTimeScale, tradeDataPriceScale, stockName);
 
         let volumeHistogramData = getVolumeHistogramData(tradeData, minTime, maxTime);
         let volumeHistogramDataSumDomain = getVolumeHistogramDataSumDomain(volumeHistogramData);
@@ -63,11 +63,11 @@ export default class extends React.Component {
     componentDidMount () {
         this.chart = makeChart(this.refs.chart);
 
-        this.drawChart(this.chart, this.props.trades);
+        this.drawChart(this.chart, this.props.trades, this.props.stockName);
     }
 
     shouldComponentUpdate (nextProps) {
-        this.drawChart(this.chart, nextProps.trades);
+        this.drawChart(this.chart, nextProps.trades, nextProps.stockName);
 
         return false;
     }
