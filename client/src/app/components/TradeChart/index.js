@@ -3,27 +3,31 @@
 import _ from 'lodash';
 import React from 'react';
 import './styles.scss';
-import makeChart from './makeChart';
+import drawChart from './drawChart';
+import calculateChart from './calculateChart';
 
 export default class extends React.Component {
-    drawChart = (chart, tradeData, stockName) => {
+    updateChart = (drawChart, calculateChart, tradeData, stockName) => {
         let {
             clean,
-            getTradeDataTimeDomain,
-            getTradeDataPriceDomain,
-            getTradeDataTimeScales,
-            getTradeDataPriceScales,
             drawHorizontalGrid,
             drawVerticalGrid,
             drawTradeDataTimeAxis,
             drawTradeDataPriceAxis,
             drawTradeLineChart,
-            getVolumeHistogramData,
-            getVolumeHistogramDataSumDomain,
-            getVolumeHistogramDataSumScale,
             drawVolumeHistogramChart,
             drawVolumeHistogramDataSumAxis
-        } = chart;
+        } = drawChart;
+
+        let {
+            getTradeDataTimeDomain,
+            getTradeDataPriceDomain,
+            getTradeDataTimeScales,
+            getTradeDataPriceScales,
+            getVolumeHistogramData,
+            getVolumeHistogramDataSumDomain,
+            getVolumeHistogramDataSumScale
+        } = calculateChart;
 
         clean();
 
@@ -62,13 +66,25 @@ export default class extends React.Component {
     };
 
     componentDidMount () {
-        this.chart = makeChart(this.refs.chart);
+        const chartDimensions = {
+            width: 960,
+            height: 500,
+            margin: {
+                top: 20,
+                right: 20,
+                bottom: 20,
+                left: 50
+            }
+        };
 
-        this.drawChart(this.chart, this.props.trades, this.props.stockName);
+        this.drawChart = drawChart(this.refs.chart, chartDimensions);
+        this.calculateChart = calculateChart(chartDimensions);
+
+        this.updateChart(this.drawChart, this.calculateChart, this.props.trades, this.props.stockName);
     }
 
     shouldComponentUpdate (nextProps) {
-        this.drawChart(this.chart, nextProps.trades, nextProps.stockName);
+        this.updateChart(this.drawChart, this.calculateChart, nextProps.trades, nextProps.stockName);
 
         return false;
     }

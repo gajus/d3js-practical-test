@@ -9,7 +9,7 @@ This chart displays:
 
 I wouldn't call this a "reusable" chart library. A lot of the logic depends on the dataset and it is abstracted at a relatively high level. Turning individual chart components into reusable, testable components and detaching them from the dataset would require more time.
 
-All of the chart drawing logic is in [`./client/src/app/components/TradeChart/makeChart.js`](./client/src/app/components/TradeChart/makeChart.js)
+All of the chart logic is in [`./client/src/app/components/TradeChart/calculateChart.js`](./client/src/app/components/TradeChart/calculateChart.js) and [`./client/src/app/components/TradeChart/drawChart.js`](./client/src/app/components/TradeChart/drawChart.js).
 
 Most of the time I have spent (in that order):
 
