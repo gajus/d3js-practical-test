@@ -21,12 +21,6 @@ What I don't like about my implementation is that all scales depend on having ac
 
 The redrawing logic is far from optimal. Not all calculations are needed on every redraw.
 
-## Prerequisites
-
-```sh
-npm install babel-cli -g
-```
-
 ## Starting Client Application
 
 ```sh
