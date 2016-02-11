@@ -61,7 +61,7 @@ export default (element, dimensions) => {
             });
     };
 
-    let drawTradeDataTimeAxis = (xScale, yScale, tickSizeInMinutes = 30) => {
+    let drawTradeDataTimeAxis = (xScale, tickSizeInMinutes = 30) => {
         let xAxis = d3.svg
             .axis()
             .scale(xScale)
@@ -75,7 +75,7 @@ export default (element, dimensions) => {
             .call(xAxis);
     };
 
-    let drawTradeDataPriceAxis = (xScale, yScale, labelText) => {
+    let drawTradeDataPriceAxis = (yScale, labelText) => {
         let yAxis = d3.svg
             .axis()
             .scale(yScale)
@@ -119,67 +119,12 @@ export default (element, dimensions) => {
             .attr('d', lineFunction(tradeData));
     };
 
-    let drawVolumeHistogramChart = (volumeHistogramData, xScale, yScale) => {
-        let volumeGraph = svg
-            .append('g')
-            .attr('class', 'volume-graph');
-
-        let bar = volumeGraph
-            .selectAll('rect')
-            .data(volumeHistogramData)
-            .enter()
-            .append('rect');
-
-        bar
-            .attr({
-                x: (tradeBin) => {
-                    return xScale(tradeBin.x);
-                },
-                y: (tradeBin) => {
-                    return dimensions.height - dimensions.margin.bottom - yScale(tradeBin.volumeSum);
-                },
-                width: (tradeBin) => {
-                    return xScale(new Date(tradeBin.x.getTime() + tradeBin.dx)) - xScale(tradeBin.x) - 1;
-                },
-                height: (tradeBin) => {
-                    return yScale(tradeBin.volumeSum);
-                },
-                class: (tradeBin) => {
-                    let volumeBarClassName = 'volume-bar';
-
-                    if (tradeBin.change === -1) {
-                        volumeBarClassName += ' change-down';
-                    } else if (tradeBin.change === 1) {
-                        volumeBarClassName += ' change-up';
-                    }
-
-                    return volumeBarClassName;
-                }
-            });
-    };
-
-    let drawVolumeHistogramDataSumAxis = (yScale) => {
-        let volumeChartYAxis = d3.svg
-            .axis()
-            .scale(yScale)
-            .ticks(2)
-            .orient('right')
-
-        svg
-            .append('g')
-            .attr('class', 'axis volume')
-            .attr('transform', 'translate(' + dimensions.margin.left + ', ' + (dimensions.height - volumedimensionsHeight) + ')')
-            .call(volumeChartYAxis);
-    };
-
     return {
         clean,
         drawHorizontalGrid,
         drawVerticalGrid,
         drawTradeDataTimeAxis,
         drawTradeDataPriceAxis,
-        drawTradeLineChart,
-        drawVolumeHistogramChart,
-        drawVolumeHistogramDataSumAxis
+        drawTradeLineChart
     };
 };

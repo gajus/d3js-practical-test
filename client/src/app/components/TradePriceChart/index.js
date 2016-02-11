@@ -2,12 +2,11 @@
 
 import _ from 'lodash';
 import React from 'react';
-import './styles.scss';
-import drawChart from './drawChart';
-import calculateChart from './calculateChart';
+import drawTradePriceChart from './drawTradePriceChart';
+import calculateTradePriceChart from './calculateTradePriceChart';
 
 export default class extends React.Component {
-    updateChart = (drawChart, calculateChart, tradeData, stockName) => {
+    updateChart = (drawnTradePriceChart, calculateTradePriceChart, tradeData, stockName) => {
         let {
             clean,
             drawHorizontalGrid,
@@ -17,17 +16,14 @@ export default class extends React.Component {
             drawTradeLineChart,
             drawVolumeHistogramChart,
             drawVolumeHistogramDataSumAxis
-        } = drawChart;
+        } = drawnTradePriceChart;
 
         let {
             getTradeDataTimeDomain,
             getTradeDataPriceDomain,
             getTradeDataTimeScales,
-            getTradeDataPriceScales,
-            getVolumeHistogramData,
-            getVolumeHistogramDataSumDomain,
-            getVolumeHistogramDataSumScale
-        } = calculateChart;
+            getTradeDataPriceScales
+        } = calculateTradePriceChart;
 
         clean();
 
@@ -47,22 +43,14 @@ export default class extends React.Component {
         drawHorizontalGrid(tradeDataTimeScale, tradeDataPriceScale);
         drawVerticalGrid(tradeDataTimeScale, tradeDataPriceScale);
 
-        let volumeHistogramData = getVolumeHistogramData(tradeData, minTime, maxTime);
-        let volumeHistogramDataSumDomain = getVolumeHistogramDataSumDomain(volumeHistogramData);
-        let volumeHistogramDataSumScale = getVolumeHistogramDataSumScale(volumeHistogramDataSumDomain);
-
-        drawVolumeHistogramChart(volumeHistogramData, tradeDataTimeScale, volumeHistogramDataSumScale);
-
-        drawVolumeHistogramDataSumAxis(volumeHistogramDataSumScale);
-
         let tradesGoupedByExchange = _.groupBy(tradeData, 'exchange');
 
         _.forEach(tradesGoupedByExchange, (tradesInExchange, exchangeName) => {
             drawTradeLineChart('exchange-' + exchangeName.toLowerCase(), tradesInExchange, tradeDataTimeScale, tradeDataPriceScale);
         });
 
-        drawTradeDataTimeAxis(tradeDataTimeScale, tradeDataPriceScale);
-        drawTradeDataPriceAxis(tradeDataTimeScale, tradeDataPriceScale, stockName);
+        drawTradeDataTimeAxis(tradeDataTimeScale);
+        drawTradeDataPriceAxis(tradeDataPriceScale, stockName);
     };
 
     componentDidMount () {
@@ -77,14 +65,14 @@ export default class extends React.Component {
             }
         };
 
-        this.drawChart = drawChart(this.refs.chart, chartDimensions);
-        this.calculateChart = calculateChart(chartDimensions);
+        this.drawnTradePriceChart = drawTradePriceChart(this.refs.chart, chartDimensions);
+        this.calculatedTradePriceChart = calculateTradePriceChart(chartDimensions);
 
-        this.updateChart(this.drawChart, this.calculateChart, this.props.trades, this.props.stockName);
+        this.updateChart(this.drawnTradePriceChart, this.calculatedTradePriceChart, this.props.trades, this.props.stockName);
     }
 
     shouldComponentUpdate (nextProps) {
-        this.updateChart(this.drawChart, this.calculateChart, nextProps.trades, nextProps.stockName);
+        this.updateChart(this.drawnTradePriceChart, this.calculatedTradePriceChart, nextProps.trades, nextProps.stockName);
 
         return false;
     }

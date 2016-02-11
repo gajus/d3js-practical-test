@@ -1,5 +1,6 @@
 'create index';
 
-export TradeChart from './TradeChart';
+export TradePriceChart from './TradePriceChart';
+export TradeVolumeChart from './TradeVolumeChart';
 export ViewportComponent from './ViewportComponent';
 

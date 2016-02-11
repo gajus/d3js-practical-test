@@ -2,6 +2,69 @@ body {
     font: normal 14px/1.5 arial, sans-serif; margin: 0; padding: 0;
 }
 
-:global .viewport {
+:global {
+    .viewport {
     width: 960px; margin: 50px auto;
+    }
+
+    .chart {
+        width: 960px;
+    }
+
+    .axis path,
+    .axis line {
+        fill: none; stroke: #000; shape-rendering: crispEdges;
+    }
+
+    .axis text {
+        font-size: 10px;
+    }
+
+    .axis.y .label {
+
+    }
+
+    .line-chart path,
+    .grid-horizontal line,
+    .grid-vertical line {
+        stroke-width: 1; fill: none; shape-rendering: crispEdges;
+    }
+
+    .line-chart {
+        path {
+            stroke: #00f;
+        }
+
+        &.exchange-lse path {
+            stroke: #1f77b4;
+        }
+
+        &.exchange-chix path {
+            stroke: #ff7f0e;
+        }
+
+        &.exchange-xvtx path {
+            stroke: #f00;
+        }
+    }
+
+    .grid-horizontal line {
+        stroke: #eee;
+    }
+
+    .grid-vertical line {
+        stroke: #999;
+    }
+
+    rect.volume-bar {
+        fill: #666; opacity: 0.5;
+
+        &.change-down {
+            fill: #f00;
+        }
+
+        &.change-up {
+            fill: #0a0;
+        }
+    }
 }

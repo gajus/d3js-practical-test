@@ -5,7 +5,8 @@ import {
 import mapActionsToProps from './../mapActionsToProps';
 import {
     ViewportComponent,
-    TradeChart
+    TradePriceChart,
+    TradeVolumeChart
 } from './../components';
 
 let HomeView,
@@ -26,7 +27,10 @@ HomeView = class extends React.Component {
         }
 
         return <ViewportComponent>
-            <TradeChart trades={this.props.trades} stockName={this.props.stockFilter.name} />
+            <div style={({border: '1px solid #eee', marginBottom: 20})}>
+                <TradePriceChart trades={this.props.trades} stockName={this.props.stockFilter.name} />
+                <TradeVolumeChart trades={this.props.trades} stockName={this.props.stockFilter.name} />
+            </div>
 
             <select onChange={this.setStockFilter}>
                 {this.props.stocks.map((stock) => {
