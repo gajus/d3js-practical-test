@@ -40,8 +40,8 @@ export default (initialState = defaultInitialState) => {
 
     if (ENVIRONMENT === 'development') {
         if (module.hot) {
-            module.hot.accept('./reducers', () => {
-                return store.replaceReducer(require('./reducers').default);
+            module.hot.accept('./rootReducer', () => {
+                return store.replaceReducer(require('./rootReducer').default);
             });
         }
     }
