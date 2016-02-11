@@ -25,7 +25,6 @@ HomeView = class extends React.Component {
             return <ViewportComponent>Fetching data.</ViewportComponent>
         }
 
-
         return <ViewportComponent>
             <TradeChart trades={this.props.trades} />
 

@@ -66,8 +66,8 @@ export default class extends React.Component {
         this.drawChart(this.chart, this.props.trades);
     }
 
-    shouldComponentUpdate () {
-        this.drawChart(this.chart, this.props.trades);
+    shouldComponentUpdate (nextProps) {
+        this.drawChart(this.chart, nextProps.trades);
 
         return false;
     }
