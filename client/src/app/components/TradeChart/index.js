@@ -42,9 +42,6 @@ export default class extends React.Component {
         drawHorizontalGrid(tradeDataTimeScale, tradeDataPriceScale);
         drawVerticalGrid(tradeDataTimeScale, tradeDataPriceScale);
 
-        drawTradeDataTimeAxis(tradeDataTimeScale, tradeDataPriceScale);
-        drawTradeDataPriceAxis(tradeDataTimeScale, tradeDataPriceScale, stockName);
-
         let volumeHistogramData = getVolumeHistogramData(tradeData, minTime, maxTime);
         let volumeHistogramDataSumDomain = getVolumeHistogramDataSumDomain(volumeHistogramData);
         let volumeHistogramDataSumScale = getVolumeHistogramDataSumScale(volumeHistogramDataSumDomain);
@@ -58,6 +55,9 @@ export default class extends React.Component {
         _.forEach(tradesGoupedByExchange, (tradesInExchange, exchangeName) => {
             drawTradeLineChart('exchange-' + exchangeName.toLowerCase(), tradesInExchange, tradeDataTimeScale, tradeDataPriceScale);
         });
+
+        drawTradeDataTimeAxis(tradeDataTimeScale, tradeDataPriceScale);
+        drawTradeDataPriceAxis(tradeDataTimeScale, tradeDataPriceScale, stockName);
     };
 
     componentDidMount () {
