@@ -1,3 +1,5 @@
+import d3 from 'd3';
+
 export default (element) => {
     const chartWidth = 960;
     const chartHeight = 500;
