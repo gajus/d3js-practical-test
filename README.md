@@ -5,6 +5,7 @@ This chart displays:
 * A single stock price over time
 * Using a separate line chart to represent trade price in every exchange (useless, I know)
 * An aggregate trade volume
+* Volume chart bar colours indicate price increase or decrecrease
 
 I wouldn't call this a "reusable" chart library. A lot of the logic depends on the dataset and it is abstracted at a relatively high level. Turning individual chart components into reusable, testable components and detaching them from the dataset would require more time.
 
