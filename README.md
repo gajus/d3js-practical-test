@@ -32,6 +32,8 @@ npm install babel-cli -g
 ```sh
 cd ./client
 
+npm install
+
 NODE_ENV=development\
     babel-node ./src/bin/server;\
     say 'client crashed';
