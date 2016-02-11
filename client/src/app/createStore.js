@@ -1,4 +1,3 @@
-import _ from 'lodash';
 import {
     createStore,
     applyMiddleware
@@ -41,7 +40,9 @@ export default (initialState = defaultInitialState) => {
     if (ENVIRONMENT === 'development') {
         if (module.hot) {
             module.hot.accept('./rootReducer', () => {
+                /* eslint-disable global-require */
                 return store.replaceReducer(require('./rootReducer').default);
+                /* eslint-enable */
             });
         }
     }

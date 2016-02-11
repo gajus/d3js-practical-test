@@ -38,9 +38,9 @@ app.get('/data', (req, res) => {
     });
 
     res.json({
-        stocks: tradeData.stocks,
         exchanges: tradeData.exchanges,
-        trades: trades
+        stocks: tradeData.stocks,
+        trades
     });
 });
 

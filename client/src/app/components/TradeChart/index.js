@@ -1,6 +1,7 @@
+/* eslint-disable one-var, init-declarations */
+
 import _ from 'lodash';
 import React from 'react';
-import d3 from 'd3';
 import './styles.scss';
 import makeChart from './makeChart';
 

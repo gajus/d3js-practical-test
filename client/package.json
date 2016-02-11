@@ -1,7 +1,7 @@
 {
   "private": true,
   "scripts": {
-    "lint": "canonical lint ./src",
+    "lint": "canonical lint ./src/**/*.js",
     "create-index": "create-index --update-index -- ./src",
     "start": "NODE_ENV=development babel-node ./src/bin/server.js"
   },

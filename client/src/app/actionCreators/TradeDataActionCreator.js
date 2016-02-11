@@ -1,4 +1,3 @@
-import _ from 'lodash';
 import {
     API_URL
 } from './../config';
@@ -8,7 +7,7 @@ let TradeDataActionCreator;
 TradeDataActionCreator = {};
 
 TradeDataActionCreator.fetch = () => {
-    return (dispatch, state) => {
+    return (dispatch) => {
         dispatch(TradeDataActionCreator.fetchRequest());
 
         return fetch(API_URL + 'data')
@@ -30,17 +29,17 @@ TradeDataActionCreator.fetchRequest = () => {
 
 TradeDataActionCreator.fetchReceive = (data) => {
     return {
-        type: 'TRADE_DATA___FETCH_RECEIVE',
-        data
+        data,
+        type: 'TRADE_DATA___FETCH_RECEIVE'
     };
 };
 
 TradeDataActionCreator.setStockFilter = (sym) => {
     return {
-        type: 'TRADE_DATA___SET_STOCK_FILTER',
         data: {
             sym
-        }
+        },
+        type: 'TRADE_DATA___SET_STOCK_FILTER'
     };
 };
 
