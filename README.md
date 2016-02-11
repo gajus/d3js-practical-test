@@ -15,7 +15,7 @@ Most of the time I have spent (in that order):
 * learning/ remembering how to use d3.js (50%)
 * attempting to detach data from the implementation (30%)
 * researching different visualizations and their applications (10%)
-* and then did the react/ flux/ server bits (10%)
+* and then did the react/ redux/ server bits (10%)
 
 What I don't like about my implementation is that all scales depend on having access to `chartWidth`, `chartHeight` and `chartMargin`. This severely restricts re-usability of the functions and adds addition complexity to testing. A better approach would have been to explicitly pass container dimensions to these functions (without margin), wrap elements that require margin in a group and translate position of the group.
 
