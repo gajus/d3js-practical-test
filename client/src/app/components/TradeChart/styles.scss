@@ -49,8 +49,12 @@
         stroke: #999;
     }
 
+    .volume-graph {
+        opacity: 0.4;
+    }
+
     rect.volume-bar {
-        opacity: 0.2;
+        fill: #666;
 
         &.change-down {
             fill: #f00;

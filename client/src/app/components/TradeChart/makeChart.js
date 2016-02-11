@@ -195,9 +195,17 @@ export default (element) => {
         });
 
         histogramData = _.map(histogramData, (tradeBin, i) => {
+            let change;
+
+            if (!histogramData[i - 1] || histogramData[i - 1].volumeSum === tradeBin.volumeSum) {
+                change = 0;
+            } else {
+                change = histogramData[i - 1].volumeSum > tradeBin.volumeSum ? -1 : 1;
+            }
+
             return {
                 ...tradeBin,
-                change: histogramData[i - 1] && histogramData[i - 1].volumeSum > tradeBin.volumeSum ? -1 : 1
+                change
             };
         });
 
@@ -250,7 +258,15 @@ export default (element) => {
                     return yScale(tradeBin.volumeSum);
                 },
                 class: (tradeBin) => {
-                    return 'volume-bar ' + (tradeBin.change > 0 ? 'change-up' : 'change-down');
+                    let volumeBarClassName = 'volume-bar';
+
+                    if (tradeBin.change === -1) {
+                        volumeBarClassName += ' change-down';
+                    } else if (tradeBin.change === 1) {
+                        volumeBarClassName += ' change-up';
+                    }
+
+                    return volumeBarClassName;
                 }
             });
     };
