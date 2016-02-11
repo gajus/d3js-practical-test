@@ -8,7 +8,7 @@ export default (element) => {
         left: 50
     };
 
-    const volumeChartHeight = chartHeight / 6;
+    const volumeChartHeight = chartHeight / 4;
 
     const body = d3
         .select(element);
@@ -220,7 +220,7 @@ export default (element) => {
             .domain(histogramDataSumDomain)
             .range([
                 volumeChartHeight - chartMargin.bottom,
-                chartMargin.top
+                0
             ]);
     };
 
