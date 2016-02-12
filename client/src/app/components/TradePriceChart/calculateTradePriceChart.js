@@ -1,21 +1,19 @@
 import d3 from 'd3';
 
 export default (dimensions) => {
-    const volumedimensionsHeight = 100;
-
-    let getTradeDataTimeDomain = (trades) => {
+    const getTradeDataTimeDomain = (trades) => {
         return d3.extent(trades, (trade) => {
             return trade.time;
         });
     };
 
-    let getTradeDataPriceDomain = (trades) => {
+    const getTradeDataPriceDomain = (trades) => {
         return d3.extent(trades, (trade) => {
             return trade.price;
         });
     };
 
-    let getTradeDataTimeScales = (minTime, maxTime) => {
+    const getTradeDataTimeScales = (minTime, maxTime) => {
         return d3
             .time
             .scale()
@@ -29,7 +27,7 @@ export default (dimensions) => {
             ]);
     };
 
-    let getTradeDataPriceScales = (minPrice, maxPrice) => {
+    const getTradeDataPriceScales = (minPrice, maxPrice) => {
         return d3
             .scale
             .linear()

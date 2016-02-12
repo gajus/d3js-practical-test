@@ -1,8 +1,8 @@
 import d3 from 'd3';
 
 export default (dimensions) => {
-    let getVolumeHistogramData = (tradeData, minTime, maxTime, tradeVolumeBinSizeInMinutes = 5) => {
-        let bindsByInterval = d3
+    const getVolumeHistogramData = (tradeData, minTime, maxTime, tradeVolumeBinSizeInMinutes = 5) => {
+        const bindsByInterval = d3
             .time
             .scale()
             .domain([
@@ -12,7 +12,7 @@ export default (dimensions) => {
             .clamp(true)
             .ticks(d3.time.minute, tradeVolumeBinSizeInMinutes);
 
-        let histogramFunction = d3
+        const histogramFunction = d3
             .layout
             .histogram()
             .value((trade) => {
@@ -47,7 +47,7 @@ export default (dimensions) => {
         return histogramData;
     };
 
-    let getVolumeHistogramDataSumDomain = (volumeHistogramData) => {
+    const getVolumeHistogramDataSumDomain = (volumeHistogramData) => {
         return [
             0,
             d3.max(volumeHistogramData, (tradeBin) => {
@@ -56,7 +56,7 @@ export default (dimensions) => {
         ];
     };
 
-    let getVolumeHistogramDataSumScale = (histogramDataSumDomain) => {
+    const getVolumeHistogramDataSumScale = (histogramDataSumDomain) => {
         return d3
             .scale
             .linear()

@@ -1,8 +1,6 @@
 import d3 from 'd3';
 
 export default (element, dimensions) => {
-    const volumedimensionsHeight =  100;
-
     const body = d3
         .select(element);
 
@@ -13,12 +11,12 @@ export default (element, dimensions) => {
             height: dimensions.height
         });
 
-    let clean = () => {
+    const clean = () => {
         svg.selectAll('*').remove();
     };
 
-    let drawHorizontalGrid = (xScale, yScale, numberOfTicks = 10) => {
-        let horizontalGridGroup = svg
+    const drawHorizontalGrid = (xScale, yScale, numberOfTicks = 10) => {
+        const horizontalGridGroup = svg
             .append('g')
             .attr('class', 'grid-horizontal');
 
@@ -39,8 +37,8 @@ export default (element, dimensions) => {
             });
     };
 
-    let drawVerticalGrid = (xScale, yScale, numberOfTicks = 10) => {
-        let verticalGridGroup = svg
+    const drawVerticalGrid = (xScale, yScale, numberOfTicks = 10) => {
+        const verticalGridGroup = svg
             .append('g')
             .attr('class', 'grid-vertical');
 
@@ -61,33 +59,33 @@ export default (element, dimensions) => {
             });
     };
 
-    let drawTradeDataTimeAxis = (xScale, tickSizeInMinutes = 30) => {
-        let xAxis = d3.svg
+    const drawTradeDataTimeAxis = (xScale, tickSizeInMinutes = 30) => {
+        const xAxis = d3.svg
             .axis()
             .scale(xScale)
             .orient('top')
             .ticks(d3.time.minute, tickSizeInMinutes);
 
-        let xAxisGroup = svg
+        const xAxisGroup = svg
             .append('g')
             .attr('class', 'axis time')
             .attr('transform', 'translate(0, ' + (dimensions.height - dimensions.margin.bottom) + ')')
             .call(xAxis);
     };
 
-    let drawTradeDataPriceAxis = (yScale, labelText) => {
-        let yAxis = d3.svg
+    const drawTradeDataPriceAxis = (yScale, labelText) => {
+        const yAxis = d3.svg
             .axis()
             .scale(yScale)
             .orient('left');
 
-        let yAxisGroup = svg
+        const yAxisGroup = svg
             .append('g')
             .attr('class', 'axis price')
             .attr('transform', 'translate(' + dimensions.margin.left + ', 0)')
             .call(yAxis);
 
-        let yAxisLabel = yAxisGroup
+        const yAxisLabel = yAxisGroup
             .append('text')
             .attr({
                 x: 10,
@@ -98,12 +96,12 @@ export default (element, dimensions) => {
             .text(labelText);
     };
 
-    let drawTradeLineChart = (className, tradeData, xScale, yScale) => {
-        let tradeLineGroup = svg
+    const drawTradeLineChart = (className, tradeData, xScale, yScale) => {
+        const tradeLineGroup = svg
             .append('g')
             .attr('class', 'line-chart ' + className);
 
-        let lineFunction = d3
+        const lineFunction = d3
             .svg
             .line()
             .x((trade) => {

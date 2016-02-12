@@ -11,16 +11,16 @@ export default (element, dimensions) => {
             height: dimensions.height
         });
 
-    let clean = () => {
+    const clean = () => {
         svg.selectAll('*').remove();
     };
 
-    let drawVolumeHistogramChart = (volumeHistogramData, xScale, yScale) => {
-        let volumeGraph = svg
+    const drawVolumeHistogramChart = (volumeHistogramData, xScale, yScale) => {
+        const volumeGraph = svg
             .append('g')
             .attr('class', 'volume-graph');
 
-        let bar = volumeGraph
+        const bar = volumeGraph
             .selectAll('rect')
             .data(volumeHistogramData)
             .enter()
@@ -54,8 +54,8 @@ export default (element, dimensions) => {
             });
     };
 
-    let drawVolumeHistogramDataSumAxis = (yScale, numberOfTicks = 5) => {
-        let volumeChartYAxis = d3.svg
+    const drawVolumeHistogramDataSumAxis = (yScale, numberOfTicks = 5) => {
+        const volumeChartYAxis = d3.svg
             .axis()
             .scale(yScale)
             .ticks(numberOfTicks)
